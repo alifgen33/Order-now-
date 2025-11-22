@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Now - Amirul (HONOR Retail Associate)</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0a1a3f, #1c4c9c);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+    }
+
+    #particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      background: #ffffff10;
+      backdrop-filter: blur(12px);
+      padding: 35px;
+      max-width: 450px;
+      width: 90%;
+      border-radius: 25px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      text-align: center;
+      opacity: 0;
+      animation: fadeIn 1s forwards, pulseContainer 3s infinite alternate;
+    }
+
+    .profile-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin-bottom: 18px;
+      border: 4px solid #fff;
+      object-fit: cover;
+      animation: bounceIn 1s forwards;
+    }
+
+    h1 { margin-bottom: 10px; font-size: 32px; font-weight: 700; color: #ffffff; }
+    p { color: #e0e0e0; font-size: 18px; margin-bottom: 25px; }
+
+    .btn {
+      display: block;
+      margin: 12px 0;
+      padding: 16px;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      border-radius: 14px;
+      transition: 0.3s;
+      font-weight: 600;
+      box-shadow: 0 0 0px rgba(0,0,0,0);
+    }
+
+    .whatsapp {
+      background: #25D366;
+      animation: glowGreen 2s infinite alternate;
+    }
+    .whatsapp:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #25D366, 0 0 40px #25D366;
+    }
+
+    .tiktok {
+      background: linear-gradient(45deg, #69C9D0, #EE1D52);
+      animation: glowTikTok 2s infinite alternate;
+    }
+    .tiktok:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #EE1D52, 0 0 40px #69C9D0;
+    }
+
+    @keyframes fadeIn { from {opacity: 0; transform: translateY(20px);} to {opacity: 1; transform: translateY(0);} }
+    @keyframes bounceIn { 0% {opacity: 0; transform: scale(0.5);} 60% {opacity:1; transform: scale(1.2);} 80%{transform: scale(0.9);} 100%{transform: scale(1);} }
+    @keyframes pulseContainer { 0% { transform: scale(1); box-shadow: 0 8px 30px rgba(0,0,0,0.2);} 50% { transform: scale(1.02); box-shadow: 0 12px 40px rgba(0,0,0,0.3);} 100% { transform: scale(1); box-shadow: 0 8px 30px rgba(0,0,0,0.2);} }
+    @keyframes glowGreen { 0% { box-shadow: 0 0 5px #25D366;} 100% { box-shadow: 0 0 20px #25D366;} }
+    @keyframes glowTikTok { 0% { box-shadow: 0 0 5px #EE1D52;} 50% { box-shadow: 0 0 15px #69C9D0;} 100% { box-shadow: 0 0 20px #EE1D52;} }
+  </style>
+</head>
+<body>
+  <canvas id="particles"></canvas>
+
+  <div class="container">
+    <img src="https://raw.githubusercontent.com/alifgen33/Order-now-/b6991d41d754d09ed0ffc3fc8b8221383be8fdf2/IMG-20240813-WA0010(1).jpg" class="profile-img" alt="Amirul Profile"/>
+    <h1>Order Now</h1>
+    <p>Assisted by <strong>Amirul</strong><br>HONOR Retail Associate</p>
+
+    <a class="btn whatsapp" href="https://wa.me/601160808093?text=Hi%2C%20I%20was%20assisted%20by%20Amirul%2C%20Retail%20Associate.%20I%20am%20interested%20in%20HONOR%20products." target="_blank">WhatsApp Me</a>
+    <a class="btn tiktok" href="https://www.tiktok.com/@sikatak50?_r=1&_t=ZS-91cL8PzhNis" target="_blank">TikTok</a>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    let particlesArray = [];
+
+    class Particle {
+      constructor(){
+        this.x = Math.random()*canvas.width;
+        this.y = Math.random()*canvas.height;
+        this.size = Math.random()*2+1;
+        this.speedX = Math.random()*1-0.5;
+        this.speedY = Math.random()*1-0.5;
+      }
+      update(){
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if(this.x > canvas.width) this.x = 0;
+        if(this.x < 0) this.x = canvas.width;
+        if(this.y > canvas.height) this.y = 0;
+        if(this.y < 0) this.y = canvas.height;
+      }
+      draw(){
+        ctx.fillStyle = '#1c4c9c';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+        ctx.fill();
+      }
+    }
+
+    function initParticles(){
+      particlesArray = [];
+      for(let i=0; i<120; i++){
+        particlesArray.push(new Particle());
+      }
+    }
+
+    function animate(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      particlesArray.forEach(p => { p.update(); p.draw(); });
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      initParticles();
+    });
+
+    initParticles();
+    animate();
+  </script>
+</body>
+</html>
